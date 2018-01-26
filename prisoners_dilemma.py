@@ -33,12 +33,12 @@ from __future__ import print_function
 import random
 import os.path              
     
-import example0, example1, example2, example3, example4
+import example0, example1, example2, example3, example4, team2_1stPrd
 
 betray = example1
 collude = example0
 
-modules = [example0, example1, example2, example3, example4]
+modules = [example0, example1, example2, example3, example4, team2_1stPrd]
 
 for module in modules:
     reload(module)
