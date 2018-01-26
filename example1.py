@@ -22,4 +22,4 @@ def move(my_history, their_history, my_score, their_score):
     '''
     
     #This example player always betrays.      
-    return 'c'
+    return 'b'
