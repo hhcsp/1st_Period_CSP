@@ -33,13 +33,10 @@ from __future__ import print_function
 import random
 import os.path              
     
-import example0, example1, example2, example3, example4, team2_1stPrd
-import example1, example2, example3, example4
-
+import example1, example2, example3, example4, hess_strategy, hess_team1, hess_team2
 betray = example1
 
-modules = [example0, example1, example2, example3, example4, team2_1stPrd]
-modules = [example1, example2, example3, example4]
+modules = [example1, example2, example3, example4, hess_strategy, hess_team1, hess_team2]
 
 for module in modules:
     reload(module)
@@ -265,7 +262,7 @@ def make_section2(modules, scores):
     for index in range(len(modules)):
         section2_list.append((modules[index].team_name,
                               'P'+str(index),
-                              str(sum(scores[index])/len(modules)),
+                              str(sum(scores[index])/(len(modules)-1)),   # FIX CODE  fix_score(index, scores[index])
                               str(modules[index].strategy_name)))
     section2_list.sort(key=lambda x: int(x[2]), reverse=True)
     
@@ -275,7 +272,14 @@ def make_section2(modules, scores):
         team_name, Pn, n_points, strategy_name = team
         section2 += '{:<10}({}): {:>10} points with {:<40}\n'.format(team_name[:10], Pn, n_points, strategy_name[:40])                       
     return section2 
-    
+
+def fix_score(index, scores):
+    total = 0
+    for i in range(len(scores)):
+        if i != index:
+            total += scores[i] 
+    return total
+                    
 def make_section3(modules, moves, scores, index):
     '''Return a string with information for the player at index, like:
     ----------------------------------------------------------------------------
@@ -364,7 +368,7 @@ def post_to_api():
 def post_to_local_html():
     pass
     
-def post_to_file(string, filename='tournament.txt', directory=''):
+def post_to_file(string, filename='tournament.txt', directory='C:\Users\robert.hess\Desktop'):
     '''Write output in a txt file.
     '''
     # Use the same directory as the python script
@@ -375,5 +379,5 @@ def post_to_file(string, filename='tournament.txt', directory=''):
  
 ### Call main_play() if this file is executed
 if __name__ == '__main__':
-    scores, moves, reports = main_play(modules[0:4])   
+    scores, moves, reports = main_play(modules[0:7])   
     section0, section1, section2, section3 = reports
