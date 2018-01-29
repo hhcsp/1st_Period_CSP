@@ -34,11 +34,12 @@ import random
 import os.path              
     
 import example0, example1, example2, example3, example4, team2_1stPrd
+import example1, example2, example3, example4
 
 betray = example1
-collude = example0
 
 modules = [example0, example1, example2, example3, example4, team2_1stPrd]
+modules = [example1, example2, example3, example4]
 
 for module in modules:
     reload(module)
@@ -120,8 +121,8 @@ def play_round(player1, player2, score1, score2, moves1, moves2):
     Returns a 2-tuple with score1 and score2 incremented by this round
     '''
     
-    RELEASE = 0 # (R, "reward" in literature) when both players collude
-    TREAT = 100 # (T, "temptation" in literature) when you betray your partner
+    RELEASE = 100 # (R, "reward" in literature) when both players collude
+    TREAT = 0 # (T, "temptation" in literature) when you betray your partner
     SEVERE_PUNISHMENT = -500 # (S, "sucker" in literature) when your partner betrays you
     PUNISHMENT = -250 # (P) when both players betray each other
     
@@ -355,6 +356,9 @@ def copy_template():
             target_file.write(''.join(source))                                   
                      
 def post_to_api():
+    # Create the file for the round-by-round results
+    filehandle = open(filename,'w')
+    filehandle.write(string)
     pass
 
 def post_to_local_html():
@@ -368,11 +372,8 @@ def post_to_file(string, filename='tournament.txt', directory=''):
         directory = os.path.dirname(os.path.abspath(__file__))  
     # Name the file tournament.txt
     filename = os.path.join(directory, filename)
-    # Create the file for the round-by-round results
-    filehandle = open(filename,'w')
-    filehandle.write(string)
  
 ### Call main_play() if this file is executed
 if __name__ == '__main__':
-    scores, moves, reports = main_play(modules[0:5])   
+    scores, moves, reports = main_play(modules[0:4])   
     section0, section1, section2, section3 = reports
