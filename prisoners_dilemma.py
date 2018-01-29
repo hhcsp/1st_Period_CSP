@@ -33,10 +33,12 @@ from __future__ import print_function
 import random
 import os.path              
     
+import example0, example1, example2, example3, example4, team2_1stPrd
 import example1, example2, example3, example4
 
 betray = example1
 
+modules = [example0, example1, example2, example3, example4, team2_1stPrd]
 modules = [example1, example2, example3, example4]
 
 for module in modules:
